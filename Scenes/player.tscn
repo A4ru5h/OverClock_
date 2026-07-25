@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cy7bfn6be4lf3"]
+
+[ext_resource type="Script" uid="uid://6qufky7c4n5d" path="res://Scripts/playerstuff/player.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://l3mglbkqcvfe" path="res://Scripts/player_camera.gd" id="2_6t5aa"]
+[ext_resource type="Script" uid="uid://cvuj3jupoxtp0" path="res://Scripts/playerstuff/shock_controls.gd" id="3_6t5aa"]
+[ext_resource type="Shader" uid="uid://k32x6y2qj3pc" path="res://buckshotshader.gdshader" id="3_vgqql"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkybt"]
+render_priority = 0
+shader = ExtResource("3_vgqql")
+shader_parameter/pixel_size = 4.0
+shader_parameter/levels = 92.0000013709104
+shader_parameter/gamma = Vector2(0.15, 10)
+
+[sub_resource type="QuadMesh" id="QuadMesh_x3wgy"]
+material = SubResource("ShaderMaterial_fkybt")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Player" type="CharacterBody3D" unique_id=1273550586 node_paths=PackedStringArray("interact_ray", "head")]
+script = ExtResource("1_cvnsp")
+interact_ray = NodePath("Node3D/RayCast3D")
+head = NodePath("CameraMountPlayerHead")
+
+[node name="CameraMountPlayerHead" type="Node3D" parent="." unique_id=333700582]
+
+[node name="Camera3D" type="Camera3D" parent="CameraMountPlayerHead" unique_id=2077655956]
+script = ExtResource("2_6t5aa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMountPlayerHead/Camera3D" unique_id=1858874243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3251772)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_x3wgy")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1763947638]
+
+[node name="RayCast3D" type="RayCast3D" parent="Node3D" unique_id=1476728652]
+target_position = Vector3(0, 0, -20)
+
+[node name="Control" type="Control" parent="." unique_id=62569782]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShocksAvailableText" type="RichTextLabel" parent="Control" unique_id=1217474655]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 7.1250005
+anchor_bottom = 5.55
+offset_right = -3.0517578e-05
+scale = Vector2(3, 3)
+bbcode_enabled = true
+
+[node name="ShockCooldown" type="Timer" parent="." unique_id=1533403577]
+one_shot = true
+
+[node name="External" type="Node" parent="." unique_id=1295622140]
+
+[node name="ShockControls" type="Node" parent="External" unique_id=1673694025]
+script = ExtResource("3_6t5aa")
+
+[connection signal="execute_shock" from="." to="External/ShockControls" method="_on_player_execute_shock"]

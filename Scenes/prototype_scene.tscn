@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://pfkdb115etgr"]
+
+[ext_resource type="PackedScene" uid="uid://cy7bfn6be4lf3" path="res://Scenes/player.tscn" id="1_lci7e"]
+[ext_resource type="PackedScene" uid="uid://djn2cdcituc11" path="res://Scenes/sleeper_animatronic.tscn" id="2_3a2rb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3a2rb"]
+sky_top_color = Color(0.22171953, 0.37576598, 0.2940687, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_j03km"]
+sky_material = SubResource("ProceduralSkyMaterial_3a2rb")
+
+[sub_resource type="Environment" id="Environment_c2tmr"]
+background_mode = 2
+sky = SubResource("Sky_j03km")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3a2rb"]
+
+[node name="PrototypeScene" type="Node3D" unique_id=873044795]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1432892604]
+environment = SubResource("Environment_c2tmr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=235155719]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
+light_color = Color(0.16470589, 0.30588236, 0.30588236, 1)
+light_energy = 1.7
+shadow_enabled = true
+
+[node name="WorldObjectsPlaceholder" type="Node3D" parent="." unique_id=764270520]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=1971206005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2262268, -0.39575195, 0.20272827)
+size = Vector3(5.963318, 0.2084961, 6.350647)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=455575506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7542346, 1.0766602, 0.20227051)
+size = Vector3(0.24365234, 3.1533203, 6.3410645)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=1007588049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1595104, 1.0766602, 0.20227051)
+size = Vector3(0.24365234, 3.1533203, 6.3410645)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=762469996]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.207, 1.077, 2.8)
+size = Vector3(0.24365234, 3.1533203, 6.3410645)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=105811664]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.20698953, 1.0766602, -2.7995977)
+size = Vector3(0.24365234, 3.1533203, 6.3410645)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="WorldObjectsPlaceholder" unique_id=1415333166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2262268, 2.343005, 0.20272827)
+size = Vector3(5.963318, 0.2084961, 6.350647)
+
+[node name="WorldObjectsImportantLater" type="Node3D" parent="." unique_id=1931591439]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WorldObjectsImportantLater" unique_id=1289782043]
+transform = Transform3D(0.8940057, 0.4480556, 0, -0.4480556, 0.8940057, 0, 0, 0, 1, 0.7435613, 1.6475327, 0)
+height = 0.26000977
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldObjectsImportantLater/CSGCylinder3D" unique_id=1533494573]
+transform = Transform3D(-0.4415059, 0.8972584, 3.3631522e-08, -1.02042215e-08, -4.2503643e-08, 1.0000001, 0.8972583, 0.44150597, 2.7921436e-08, 0, 0, 0)
+light_color = Color(1, 1, 0.80784315, 1)
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_length = 5.0
+spot_attenuation = 1.99
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="WorldObjectsImportantLater/CSGCylinder3D" unique_id=1513976398]
+sub_emitter = NodePath(".")
+fixed_fps = 10
+process_material = SubResource("ParticleProcessMaterial_3a2rb")
+
+[node name="Player" parent="." unique_id=1273550586 instance=ExtResource("1_lci7e")]
+transform = Transform3D(0.038487714, 0.14710164, -0.98837227, -0.0057238736, 0.9891214, 0.14699024, 0.99924266, 0, 0.03891101, -1.4956119, 0.662, 0)
+max_yaw_degrees = 30.0
+max_pitch_degrees = 10.0
+
+[node name="SleeperAnimatronic" parent="." unique_id=1342100076 instance=ExtResource("2_3a2rb")]
+transform = Transform3D(0.16818325, 0, -0.10823306, 0, 0.2, 0, 0.10823306, 0, 0.16818325, 1.8179905, 0.7932612, -1.1291265)

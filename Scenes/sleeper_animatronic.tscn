@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://djn2cdcituc11"]
+
+[ext_resource type="Script" uid="uid://x44fwlhimyjq" path="res://Scripts/sleeper_animatronic.gd" id="1_iab8r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ws4m6"]
+size = Vector3(5, 8, 1)
+
+[node name="SleeperAnimatronic" type="CharacterBody3D" unique_id=1342100076]
+script = ExtResource("1_iab8r")
+move_duration_max = 2.0
+pause_duration_min = 0.5
+pause_duration_max = 1.5
+sprite_path = NodePath("")
+highlight_color = Color(1.0866516, 0.56025934, 0.32132024, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1403271149]
+shape = SubResource("BoxShape3D_ws4m6")
