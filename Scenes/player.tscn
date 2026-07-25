@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fkybt"]
 render_priority = 0
 shader = ExtResource("3_vgqql")
-shader_parameter/pixel_size = 4.0
+shader_parameter/pixel_size = 2.0
 shader_parameter/levels = 92.0000013709104
 shader_parameter/gamma = Vector2(0.15, 10)
 
