@@ -1,3 +1,7 @@
-MeshInstance3D
+Label3D
+Control
+SubViewport
 SpotLight3D
+AreaLight3D
+MeshInstance3D
 OmniLight3D
