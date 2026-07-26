@@ -1,3 +1,7 @@
 res://Scenes/prototype_scene.tscn
 res://buckshotshader.gdshader
 res://Scenes/player.tscn
+res://Flickering.gd
+res://Scenes/world_environment.gd
+res://Scenes/lever.gd
+res://Scenes/sprite_3d.gd

@@ -25,7 +25,7 @@ head = NodePath("CameraMountPlayerHead")
 script = ExtResource("2_6t5aa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMountPlayerHead/Camera3D" unique_id=1858874243]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46341917)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5763366)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_x3wgy")
 
