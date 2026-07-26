@@ -24,10 +24,8 @@ material = SubResource("StandardMaterial3D_v2wq8")
 size = Vector2(0.1, 0.1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iab8r"]
-load_path = "res://.godot/imported/MonsterSleeperGMTK_Ch30_1002_Diffuse.png-3798ad7f6cbb1a02055290c625db0493.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ws4m6"]
-load_path = "res://.godot/imported/MonsterSleeperGMTK_Ch30_1002_Glossiness.png-1be3b8d624ba2e7d5fd977fde181e665.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16uhs"]
 resource_name = "Ch30_Body1"
@@ -37,13 +35,10 @@ roughness_texture = SubResource("CompressedTexture2D_ws4m6")
 roughness_texture_channel = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rndei"]
-load_path = "res://.godot/imported/MonsterSleeperGMTK_Ch30_1001_Diffuse.png-f20d884414fb77fb87645a59f682ca64.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1vc43"]
-load_path = "res://.godot/imported/MonsterSleeperGMTK_Ch30_1001_Glossiness.png-06a9d4d06c2efc83ac4cb3ab4f3728be.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_e13iv"]
-load_path = "res://.godot/imported/MonsterSleeperGMTK_Ch30_1001_Normal.png-4e89694ab7c22707ae42e882e537f594.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g15jr"]
 resource_name = "Ch30_Body"
@@ -3290,7 +3285,7 @@ anim_player = NodePath("MonsterSleeperGMTK/AnimationPlayer")
 gpu_particles = NodePath("GPUParticles3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1403271149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18173218, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18173218, 2, 0)
 shape = SubResource("BoxShape3D_ws4m6")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=486030785]
