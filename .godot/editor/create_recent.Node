@@ -1,3 +1,10 @@
+Label3D
 MeshInstance3D
-SpotLight3D
+AreaLight3D
 OmniLight3D
+ColorRect
+Control
+Label
+SubViewport
+Node3D
+SpotLight3D

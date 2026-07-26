@@ -10,9 +10,6 @@ extends CharacterBody3D
 # interact raycast
 @export var interact_ray : RayCast3D
 
-# HOVERING over animatronci
-var _hovered_animatronic: Sleeper_Animatronic = null
-
 
 # --- SIGNAL for shocks -- #
 signal execute_shock
@@ -47,8 +44,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	check_for_shock()
-	_update_hover_highlight()
-	check_for_shock()
 
 
 # THIS IS THE CAMERA MOVEMENT
@@ -77,33 +72,23 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # APPLYING THE SHOCK
-func _update_hover_highlight() -> void:
-	var current := _get_animatronic_under_raycast()
-	if current != _hovered_animatronic:
-		if _hovered_animatronic:
-			_hovered_animatronic.set_highlighted(false)
-		if current:
-			current.set_highlighted(true)
-		_hovered_animatronic = current
-
-
-func _get_animatronic_under_raycast() -> Sleeper_Animatronic:
-	if not interact_ray.is_colliding():
-		return null
-	var collider := interact_ray.get_collider()
-	if collider is Sleeper_Animatronic:
-		return collider
-	return null
-
-func _is_looking_at_animatronic() -> bool:
-	return _hovered_animatronic != null
 
 
 func check_for_shock() -> void:
-	if _is_looking_at_animatronic():
-		if Input.is_action_just_pressed("Shock") and shock_timer.time_left == 0.0:
-			shock_timer.start()
-			execute_shock.emit()
+	var coll = interact_ray.get_collider()
+	if interact_ray.is_colliding():
+		if coll is Sleeper_Animatronic:
+			$Control/defaultcrosshair.hide()
+			$Control/aimedcrosshair.show()
+			if Input.is_action_just_pressed("Shock") and shock_timer.time_left == 0.0:
+				shock_timer.start()
+				execute_shock.emit()
+		else:
+			$Control/defaultcrosshair.show()
+			$Control/aimedcrosshair.hide()
+	else:
+		$Control/defaultcrosshair.show()
+		$Control/aimedcrosshair.hide()
 
 
 # PHYSICS
