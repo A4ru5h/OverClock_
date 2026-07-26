@@ -4,3 +4,6 @@ res://buckshotshader.gdshader
 res://Scripts/sleeper_animatronic.gd
 res://Scenes/sleeper_animatronic.tscn
 res://Scenes/player.tscn
+res://Scripts/rouletewheel.gd
+res://Scenes/cash_out_lever.tscn
+res://Scenes/endscrene.tscn

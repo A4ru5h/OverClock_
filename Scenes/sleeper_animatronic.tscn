@@ -21,7 +21,7 @@ billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_4884p"]
 material = SubResource("StandardMaterial3D_v2wq8")
-size = Vector2(0.1, 0.1)
+size = Vector2(0.05, 0.05)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iab8r"]
 
@@ -287,7 +287,7 @@ bind/64/pose = Transform3D(-99.40979, -4.026777, -10.091376, -9.994861, -2.58006
 
 [sub_resource type="Animation" id="Animation_iohfy"]
 resource_name = "Attack"
-length = 1.7
+length = 3.0
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
@@ -3283,10 +3283,6 @@ _data = {
 script = ExtResource("1_iab8r")
 anim_player = NodePath("MonsterSleeperGMTK/AnimationPlayer")
 gpu_particles = NodePath("GPUParticles3D")
-timer_min = 0.5
-timer_max = 1.0
-timer_min_chase = 0.5
-timer_max_chase = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1403271149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18173218, 2, 0)

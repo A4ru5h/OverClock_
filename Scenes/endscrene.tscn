@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dv2yk5rhy6swv"]
+
+[ext_resource type="FontFile" uid="uid://du7suxci1x0ga" path="res://Assets/Dirty War.otf" id="1_s7jhx"]
+
+[sub_resource type="Theme" id="Theme_m660m"]
+default_font = ExtResource("1_s7jhx")
+default_font_size = 50
+
+[node name="end" type="Node2D" unique_id=1782361886]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1190555014]
+offset_left = -279.0
+offset_top = -145.0
+offset_right = 1610.0
+offset_bottom = 809.0
+color = Color(0.17985451, 0.23155704, 0.33469263, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1934385806]
+offset_left = 382.0
+offset_top = 187.0
+offset_right = 970.0
+offset_bottom = 448.0
+theme = SubResource("Theme_m660m")
+bbcode_enabled = true
+text = "You either died
+or u made it
+hope u made money
+but we're out of time
+for this jam"

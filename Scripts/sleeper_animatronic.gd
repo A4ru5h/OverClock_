@@ -161,3 +161,5 @@ func end_game() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Shocked":
 		_enter_state(State.SLEEPING)
+	if anim_name == "Attack":
+		get_tree().change_scene_to_file("res://Scenes/endscrene.tscn")

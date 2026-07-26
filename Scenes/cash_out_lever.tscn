@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://coc81i7vjh8qf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iclif"]
+size = Vector3(1, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iclif"]
+albedo_color = Color(0.13498855, 0.14226517, 0.1422669, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_83mbo"]
+material = SubResource("StandardMaterial3D_iclif")
+size = Vector3(0.8, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrngb"]
+albedo_color = Color(0.40392157, 0.41960785, 0.41960785, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xnjt3"]
+material = SubResource("StandardMaterial3D_nrngb")
+size = Vector3(0.2, 2, 0.2)
+
+[sub_resource type="Animation" id="Animation_bbjci"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.3004644, 0, 0, 0.95379305)
+
+[sub_resource type="Animation" id="Animation_6yp81"]
+resource_name = "flick"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.16666667, 1, 0.3004644, 0, 0, 0.95379305, 0.5, 1, -0.32196, 0, 0, 0.94675326)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.13333334, 1, 0, 0.83796215, 0.3834567, 0.53333336, 1, 0, 0.83796215, -0.47044384)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e71pe"]
+_data = {
+&"RESET": SubResource("Animation_bbjci"),
+&"flick": SubResource("Animation_6yp81")
+}
+
+[node name="CashOutLever" type="StaticBody3D" unique_id=846266728]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1336824520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99038815, -0.3629489)
+shape = SubResource("BoxShape3D_iclif")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=836607340]
+mesh = SubResource("BoxMesh_83mbo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1505350417]
+transform = Transform3D(1, 0, 0, 0, 0.8194423, -0.5731617, 0, 0.5731617, 0.8194423, 0, 0.83796215, -0.47044384)
+mesh = SubResource("BoxMesh_xnjt3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D" unique_id=694419224]
+libraries/ = SubResource("AnimationLibrary_e71pe")
