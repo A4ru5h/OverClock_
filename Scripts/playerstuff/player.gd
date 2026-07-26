@@ -101,6 +101,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func check_for_shock() -> void:
 	var coll = interact_ray.get_collider()
 	if interact_ray.is_colliding():
+		if coll is RouletteWheel:
+			$Control/defaultcrosshair.hide()
+			$Control/aimedcrosshair.show()
+			if Input.is_action_just_pressed("Shock"):
+				get_tree().change_scene_to_file("res://Scenes/endscrene.tscn")
+
+			
 		if coll is Sleeper_Animatronic:
 			$Control/defaultcrosshair.hide()
 			$Control/aimedcrosshair.show()

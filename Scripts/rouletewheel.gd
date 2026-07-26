@@ -1,3 +1,4 @@
+class_name RouletteWheel
 extends Node3D
 ## Spins, and also racks up money the whole time it's active.
 

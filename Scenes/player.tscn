@@ -49,10 +49,13 @@ mouse_filter = 2
 
 [node name="ShocksAvailableText" type="RichTextLabel" parent="Control" unique_id=1217474655]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 7.1250005
-anchor_bottom = 5.55
-offset_right = -3.0517578e-05
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -1561.936
+offset_right = 7043.751
+offset_bottom = 1561.936
+grow_vertical = 2
 scale = Vector2(3, 3)
 bbcode_enabled = true
 
