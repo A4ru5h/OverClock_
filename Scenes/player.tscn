@@ -3,17 +3,14 @@
 [ext_resource type="Script" uid="uid://6qufky7c4n5d" path="res://Scripts/playerstuff/player.gd" id="1_cvnsp"]
 [ext_resource type="Script" uid="uid://l3mglbkqcvfe" path="res://Scripts/player_camera.gd" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://cvuj3jupoxtp0" path="res://Scripts/playerstuff/shock_controls.gd" id="3_6t5aa"]
-[ext_resource type="Shader" uid="uid://k32x6y2qj3pc" path="res://buckshotshader.gdshader" id="3_vgqql"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkybt"]
-render_priority = 0
-shader = ExtResource("3_vgqql")
-shader_parameter/pixel_size = 1.0
-shader_parameter/levels = 92.0000013709104
-shader_parameter/gamma = Vector2(0.15, 10)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fkybt"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_x3wgy"]
-material = SubResource("ShaderMaterial_fkybt")
+material = SubResource("StandardMaterial3D_fkybt")
 flip_faces = true
 size = Vector2(2, 2)
 
