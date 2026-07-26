@@ -3283,6 +3283,10 @@ _data = {
 script = ExtResource("1_iab8r")
 anim_player = NodePath("MonsterSleeperGMTK/AnimationPlayer")
 gpu_particles = NodePath("GPUParticles3D")
+timer_min = 0.5
+timer_max = 1.0
+timer_min_chase = 0.5
+timer_max_chase = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1403271149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18173218, 2, 0)

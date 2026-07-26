@@ -1,11 +1,12 @@
 class_name Player
 extends CharacterBody3D
 
-# --- movemnt settigs --- lowk not needed tho #
-@export var move_speed: float = 5.0
-@export var sprint_speed: float = 8.0
-@export var jump_velocity: float = 4.5
-@export var gravity: float = 9.8
+# --- STATE MACHINE --- #
+enum State { NORMAL, DEATH_BY_SLEEPER, ADVERTISEMENT }
+var _state = State.NORMAL
+
+# --- SLEEPER ANIMATRONIC -- #
+@export var sleeper_animatronic : Sleeper_Animatronic
 
 # interact raycast
 @export var interact_ray : RayCast3D
@@ -43,7 +44,8 @@ func _ready() -> void:
 	center_pitch = head.rotation.x
 
 func _process(delta: float) -> void:
-	check_for_shock()
+	if _state == State.NORMAL:
+		check_for_shock()
 
 
 # THIS IS THE CAMERA MOVEMENT
@@ -54,25 +56,47 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	if _state == State.DEATH_BY_SLEEPER:
+		look_at(Vector3(sleeper_animatronic.global_position.x,sleeper_animatronic.global_position.y, sleeper_animatronic.global_position.z  ))
 
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		var max_yaw_rad: float = deg_to_rad(max_yaw_degrees)
-		var max_pitch_rad: float = deg_to_rad(max_pitch_degrees)
+	
+	if _state == State.NORMAL:
+		if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			var max_yaw_rad: float = deg_to_rad(max_yaw_degrees)
+			var max_pitch_rad: float = deg_to_rad(max_pitch_degrees)
 
-		# Accumulate offsets, then clamp them to the allowed range.
-		yaw_offset -= event.relative.x * mouse_sensitivity * 0.01
-		yaw_offset = clamp(yaw_offset, -max_yaw_rad, max_yaw_rad)
+			# Accumulate offsets, then clamp them to the allowed range.
+			yaw_offset -= event.relative.x * mouse_sensitivity * 0.01
+			yaw_offset = clamp(yaw_offset, -max_yaw_rad, max_yaw_rad)
 
-		pitch_offset -= event.relative.y * mouse_sensitivity * 0.01
-		pitch_offset = clamp(pitch_offset, -max_pitch_rad, max_pitch_rad)
+			pitch_offset -= event.relative.y * mouse_sensitivity * 0.01
+			pitch_offset = clamp(pitch_offset, -max_pitch_rad, max_pitch_rad)
 
-		# Apply: body yaw rotates left/right, head pitch rotates up/down.
-		rotation.y = center_yaw + yaw_offset
-		head.rotation.x = center_pitch + pitch_offset
+			# Apply: body yaw rotates left/right, head pitch rotates up/down.
+			rotation.y = center_yaw + yaw_offset
+			head.rotation.x = center_pitch + pitch_offset
+
+
+
+
+
+# ------------------- #
+# STATE MACHINE STUFF
+# -------------------- #
+
+
+
+
+
+
+
+
+
+
 
 
 # APPLYING THE SHOCK
-
 
 func check_for_shock() -> void:
 	var coll = interact_ray.get_collider()
@@ -91,30 +115,9 @@ func check_for_shock() -> void:
 		$Control/aimedcrosshair.hide()
 
 
-# PHYSICS
-func _physics_process(delta: float) -> void:
-	pass
-	# I'm commenting it out for now, but if you want player movement just uncomment
-	#player_move(delta)
+# END THE GAME AFTER BEING KILLED
+func _on_sleeper_animatronic_sleeper_kills_player() -> void:
+	end_game()
 	
-
-func player_move(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-
-	var speed: float = sprint_speed if Input.is_action_pressed("sprint") else move_speed
-
-	var input_dir: Vector2 = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if direction != Vector3.ZERO:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
-
-	move_and_slide()
+func end_game() -> void:
+	_state = State.DEATH_BY_SLEEPER

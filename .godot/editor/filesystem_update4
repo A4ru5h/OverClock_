@@ -1,2 +1,6 @@
-res://Scenes/sleeper_animatronic.tscn
+res://Scripts/playerstuff/player.gd
+res://Scenes/prototype_scene.tscn
 res://buckshotshader.gdshader
+res://Scripts/sleeper_animatronic.gd
+res://Scenes/sleeper_animatronic.tscn
+res://Scenes/player.tscn

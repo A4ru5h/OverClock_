@@ -12,19 +12,25 @@ extends CharacterBody3D
 ##              seconds, then resets straight back to SLEEPING to restart
 ##              the whole cycle.
 
-enum State { SLEEPING, WAKING, CHASING, SHOCKED }
+enum State { SLEEPING, WAKING, CHASING, SHOCKED, GOING_FOR_KILL }
+@export var player : Player
 
 # --- Animation ---
 @export var anim_player: AnimationPlayer
 @export var gpu_particles : GPUParticles3D
 @onready var timer: Timer = $Timer
+@export var player_kill_point : Node3D 
+
+signal sleeper_kills_player
 
 
 # --- Phase timing ---
 @export var start_state: State = State.SLEEPING # what it's doing when the level loads
-@export var sleep_duration: float = 6.0          # how long it sleeps before waking on its own
-@export var wake_up_duration: float = 3.0        # how long the "getting up" process takes
-@export var shock_delay: float = 1.5      
+@export var timer_min : float = 2.0   
+@export var timer_max : float = 6.0
+@export var timer_min_chase : float = 8.0
+@export var timer_max_chase : float = 12.0
+
 @export var rotation_speed : float = 0.5
 var _state: State
 
@@ -58,17 +64,17 @@ func _enter_state(new_state: State) -> void:
 
 	match new_state:
 		State.SLEEPING:
-			var _a = randf_range(1.0,2.5)
+			var _a = randf_range(timer_min,timer_max)
 			timer.start(_a)
 			anim_player.play("Crouched")
 
 		State.WAKING:
-			var _a = randf_range(1.0,2.5)
+			var _a = randf_range(timer_min,timer_max)
 			timer.start(_a)
 			anim_player.play("Crouched")
 
 		State.CHASING:
-			var _a = randf_range(1.0,2.5)
+			var _a = randf_range(timer_min_chase,timer_max_chase)
 			timer.start(_a)
 			anim_player.play("Crouched_2")
 
@@ -76,6 +82,10 @@ func _enter_state(new_state: State) -> void:
 			anim_player.play("Shocked")
 			if gpu_particles:
 				gpu_particles.restart()  # restart() resets + emits, works even if it fired recently
+		
+		State.GOING_FOR_KILL:
+			_get_direction_to(player)
+			anim_player.play("Attack")
 
 
 
@@ -135,14 +145,17 @@ func _on_timer_timeout() -> void:
 	elif _state == State.WAKING:
 		_enter_state(State.CHASING)
 	elif _state == State.CHASING:
-		# END THE GAME
+		# END THE GAME GO FOR KILL
 		end_game()
 	elif _state == State.SHOCKED:
 		pass
 
 # end the game with jump scare
 func end_game() -> void:
-	pass
+	global_position = player_kill_point.global_position
+	
+	sleeper_kills_player.emit()
+	_enter_state(State.GOING_FOR_KILL)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
